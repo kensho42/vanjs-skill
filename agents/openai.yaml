@@ -1,0 +1,14 @@
+interface:
+  display_name: VanJS Development
+  short_description: Build and review reliable VanJS, VanX, and Mini-Van code
+  default_prompt: Use $vanjs-development to implement or review this task with the
+    project's installed VanJS packages.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
