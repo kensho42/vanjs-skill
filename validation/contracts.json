@@ -1,0 +1,209 @@
+{
+  "suite": "vanjs-development-contracts",
+  "runtime": "v24.19.0",
+  "coverage": "Node with jsdom; no real-browser or coding-agent evaluation",
+  "baseline": {
+    "vanjs-core": "1.6.1",
+    "vanjs-ext": "0.6.3",
+    "mini-van-plate": "0.6.3",
+    "jsdom": "26.1.0"
+  },
+  "checks": [
+    {
+      "name": "core.comment-placeholder-repeated-toggle",
+      "kind": "recipe",
+      "status": "passed"
+    },
+    {
+      "name": "core.hidden-preserves-input-node-and-value",
+      "kind": "recipe",
+      "status": "passed"
+    },
+    {
+      "name": "core.null-removal-does-not-reappear",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "core.reactive-fragment-loses-binding",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "core.detached-subtree-loses-binding",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "core.derived-values-update-after-microtask",
+      "kind": "contract",
+      "status": "passed"
+    },
+    {
+      "name": "core.reentrant-binding-needs-later-batch",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "core.written-state-excluded-from-dependencies",
+      "kind": "contract",
+      "status": "passed"
+    },
+    {
+      "name": "core.derive-returned-function-is-not-cleanup",
+      "kind": "contract",
+      "status": "passed"
+    },
+    {
+      "name": "core.read-after-await-is-untracked",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "core.binding-errors-logged-and-previous-node-kept",
+      "kind": "contract",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.absent-field-and-delete-readd-stay-stale",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.initialized-field-remains-reactive",
+      "kind": "recipe",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.structural-read-tracks-add-delete-readd",
+      "kind": "recipe",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.array-length-truncation-leaves-rows",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.replace-clears-connected-list",
+      "kind": "recipe",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.parent-reassignment-retains-old-list-source",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.replace-retains-list-source",
+      "kind": "recipe",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.primitive-and-fragment-rows-break-deletion",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.persistent-element-rows-support-edit-and-delete",
+      "kind": "recipe",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.row-state-assignment-bypasses-deep-reactivity",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.collection-assignment-converts-new-object",
+      "kind": "recipe",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.array-index-versus-record-key-identity",
+      "kind": "contract",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.object-array-aliasing-and-detached-replacements",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "vanx.compact-preserves-prototype-and-opaque-identity",
+      "kind": "contract",
+      "status": "passed"
+    },
+    {
+      "name": "mini.snapshot-props-and-render-time-children",
+      "kind": "contract",
+      "status": "passed"
+    },
+    {
+      "name": "mini.null-compatibility-table",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "mini.ordinary-handler-omitted-async-handler-serialized",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "mini.boolean-attributes-and-explicit-aria-strings",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "mini.raw-json-attribute-does-not-round-trip",
+      "kind": "known-limitation",
+      "status": "passed"
+    },
+    {
+      "name": "mini.encoded-attribute-and-json-script-round-trip",
+      "kind": "recipe",
+      "status": "passed"
+    },
+    {
+      "name": "mini.dummy-adapter-noops-and-snapshots",
+      "kind": "known-limitation",
+      "status": "passed"
+    }
+  ],
+  "versions": {
+    "vanjs-core": "1.6.1",
+    "vanjs-ext": "0.6.3",
+    "mini-van-plate": "0.6.3",
+    "jsdom": "26.1.0"
+  },
+  "passed": 32,
+  "failed": 0,
+  "status": "passed",
+  "executed_at": "2026-10-04T03:34:18.993Z",
+  "suite_sha256": "a856b868152eaa16fdbccbe96c9b53aa895f8cdd8c44bcc9594c9a42575040cb",
+  "invocation": "node scripts/check-contracts.mjs --project <isolated-runtime-directory>",
+  "invocation_note": "The original machine-specific dependency directory is replaced with a placeholder for publication; the recorded results and suite hash are unchanged.",
+  "exit_code": 0,
+  "stderr": "",
+  "baseline_comparison": "The carried-forward baseline had 31 named checks. This rebuild strengthens keyed snapshot, compact, and ordinary input attribute assertions and adds one object-array aliasing and detached-replacement check, for 32 total.",
+  "setup_gate_checks": [
+    {
+      "name": "reject-mismatched-package-version",
+      "status": "passed",
+      "method": "A separate process overrides only the reported vanjs-core package version metadata in memory. Installed package files and library implementations are unchanged.",
+      "synthetic_version": "0.0.0-gate-probe",
+      "actual_node_runtime": "v24.19.0",
+      "observed_status": "setup-error",
+      "observed_exit_code": 2,
+      "behavior_checks_run": 0,
+      "error": "Baseline mismatch; no behavior checks ran. Use the pinned test project or review the new versions before updating expectations: vanjs-core: expected 1.6.1, found 0.0.0-gate-probe",
+      "stderr": ""
+    }
+  ],
+  "limitations": [
+    "Behavior checks use actual published package exports under Node and jsdom; they do not provide real-browser coverage.",
+    "This report records contract-runner output and the separately labeled setup-gate probe. It does not cover fresh-agent tasks or documentation validation.",
+    "No comparative experiment measures coding-agent improvement over a previous skill.",
+    "Exact package-version gates identify this maintenance baseline. The recorded Node patch version identifies the observed environment and is not a portability gate."
+  ]
+}

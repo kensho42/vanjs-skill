@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "skill_name": "vanjs-development",
+  "reviewed_at": "2026-10-04",
+  "context": "Fresh evaluations of the complete rebuild made from the writing-plans plan.",
+  "runtime": {
+    "node": "24.19.0",
+    "vanjs-core": "1.6.1",
+    "vanjs-ext": "0.6.3",
+    "mini-van-plate": "0.6.3",
+    "jsdom": "26.1.0"
+  },
+  "results": {
+    "executed": 3,
+    "passed": 3,
+    "failed": 0,
+    "not_run": 1
+  },
+  "evaluation_isolation": "Each agent started with a fresh context and received its task, raw inputs, current skill path and installed runtime. Grader expectations, earlier solutions and research were excluded.",
+  "structural_checks": {
+    "skill_validator": "passed",
+    "javascript_fences_parsed": 33,
+    "local_links_checked": 70,
+    "fixture_syntax_checks": 2,
+    "json_yaml": "passed",
+    "staged_whitespace": "passed"
+  },
+  "reviewed_files_sha256": {
+    "SKILL.md": "f60d7f1c3bc6292e680c683a09abee503c126e812698acdb69a3d752fffbe6c9",
+    "evals/cases.json": "fc30d25b05ea27a778b234c5e941a790de30f3e0424c268b484bbf5531abc11d",
+    "scripts/check-contracts.mjs": "a856b868152eaa16fdbccbe96c9b53aa895f8cdd8c44bcc9594c9a42575040cb",
+    "references/conditional-rendering.md": "2d4a2761916b33804b4d73c6f06b3136943553a17a0970be3d06cbcc843a06f2",
+    "references/decision-guide.md": "84f8760314b52e42fb0a1ffb3a68e0a74390c3c246cc3a2dfc49d4d9250a425b",
+    "references/minivan-ssr.md": "8b062e589a177b478d8ac559ba8a053eb8b35f38e3ed735b78481c3a775c3ea5",
+    "references/review-checklist.md": "6b3bb66d7283613ed74395a2ce8d7bb98283467089fb66f1516936f1924f8549",
+    "references/sources.md": "f2fda34198a0e608ae569773fef8ad17d28f2875d2bbe6d132bff06a9463f4ca",
+    "references/vanjs-core.md": "5c957b73ef4785fcc447897d55f9afa4684f4b6e85a1a3789e591a34ac04a6c0",
+    "references/vanx.md": "9e447cf80085a9ce8b4e8737974c2a16ba77e8613f11052879d6916c11269951",
+    "evals/fixtures/panel.js": "740cdb0d7bc179f068e903d009509ae1a726b82bb30ef473bee2c05d45194839",
+    "evals/fixtures/records.js": "de3ba0c86fa19182a2863230caa1d93e3e7002ddf38726c0169e730e46f99aab"
+  },
+  "cases": [
+    {
+      "id": "preserved-panel-review",
+      "status": "passed",
+      "verification": "Fresh agent used installed production/debug core with jsdom; reviewed original and exercised the suggested correction in memory.",
+      "assertions": [
+        "Initially hidden and visible null-removal failures reproduced",
+        "Persistent hide/show retained strict input identity and live draft",
+        "Valid current-node Status binding retained its span and updated styling",
+        "No files edited and no dependencies added",
+        "No unexpected console or debug errors"
+      ],
+      "verification_scope": "Node/jsdom; no real-browser rendering or focus checks"
+    },
+    {
+      "id": "vanx-live-records",
+      "status": "passed",
+      "verification": "Fresh agent wrote a focused check that failed on the original refresh behavior, then passed with production and debug core after the repair.",
+      "commands": [
+        "node check-records.mjs",
+        "node check-records.mjs --debug"
+      ],
+      "assertions": [
+        "Existing collection and retained row/input identities preserved",
+        "Snapshot updates, insertions, removals and requested order applied",
+        "Arbitrary unique string IDs preserved, including empty, numeric-looking, Unicode and special names",
+        "Repeated error show/clear and truthy/falsey behavior retained",
+        "Clear, repeated clear, empty snapshots and repopulation passed",
+        "Input handling after refresh and later snapshot updates passed",
+        "No unexpected callback console errors"
+      ],
+      "changed_task_files": [
+        "records.js",
+        "check-records.mjs"
+      ],
+      "verification_scope": "Node/jsdom; no browser focus or layout checks"
+    },
+    {
+      "id": "shared-form-handoff",
+      "status": "passed",
+      "verification": "Fresh agent implemented text-mode SSR and the shared client handoff, then passed a reusable parser/interaction check in production and debug-component modes.",
+      "commands": [
+        "npm run check",
+        "node check.mjs --debug"
+      ],
+      "cases_per_run": 16,
+      "assertions": [
+        "Parsed initial controls match valid Unicode text with LF line endings and both boolean states",
+        "Encoded state round-trips quotes, backslashes, entity text, Unicode, closing tags, CR/CRLF and isolated surrogates",
+        "Server output contains no script elements or inline event attributes",
+        "Live pre-hydration text and checkbox values survive replacement",
+        "ARIA updates repeatedly and immediate submission after a toggle captures current state",
+        "Pending save snapshots, duplicate prevention and rejection/retry behave correctly",
+        "Controls retain identity after hydration during ordinary updates",
+        "No unexpected console, jsdom or unhandled Promise errors"
+      ],
+      "changed_task_files": [
+        "server.js",
+        "client.js",
+        "form.js",
+        "state.js",
+        "check.mjs",
+        "README.md",
+        "package.json"
+      ],
+      "verification_scope": "Node/jsdom. Textarea and HTML parsing normalize CR/CRLF and HTML-invalid code points; exact control equality was checked for valid Unicode LF text. No real-browser layout, autofill or complete focus/scroll coverage."
+    },
+    {
+      "id": "installed-version-timing",
+      "status": "not_run",
+      "reason": "This maintenance prompt requires an existing project intentionally pinned to an older VanJS version. No such project was supplied for this rebuild."
+    }
+  ],
+  "independent_review": {
+    "scope": "Complete rebuilt instructions, references, evaluation catalog, actual-package runner/report, and installed sources.",
+    "result": "No blocking findings.",
+    "record_limit": "The reviewer did not inspect fresh task solutions; the parent recorded task results from their returned verification and reviewed the generated implementations."
+  },
+  "limitations": [
+    "No real-browser coverage.",
+    "No comparison experiment measured model improvement over the previous skill.",
+    "The historical records apply to these reviewed files and observed runs; rerun relevant checks after substantive changes.",
+    "Task command lines describe the isolated evaluation workspaces; the package supplies prompts and raw fixtures rather than the agents' generated solutions."
+  ],
+  "reviewed_ui_fields": {
+    "display_name": "VanJS Development",
+    "short_description": "Build and review reliable VanJS, VanX, and Mini-Van code",
+    "default_prompt": "Use $vanjs-development to implement or review this task with the project's installed VanJS packages."
+  },
+  "ui_metadata_note": "Authored UI fields were verified semantically after save; export may normalize YAML and add icon or policy metadata."
+}
