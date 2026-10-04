@@ -1,0 +1,96 @@
+{
+  "skill_name": "vanjs-development",
+  "schema_version": 2,
+  "runner_guidance": [
+    "Select exactly one case and its workspace_profile. The baseline-esm profile applies only to the first three cases. The installed-version-timing case uses the supplied project and its existing dependencies, test tools, module conventions, and lockfile.",
+    "Give a fresh agent only the selected prompt, listed raw input files, the rebuilt skill instructions and references, and the selected workspace. Do not expose this catalog, expected outcomes, validation records, prior outputs, or another case solution. Keep the grader fields outside agent context.",
+    "Resolve input_files relative to this evals directory and copy their unmodified contents into the selected workspace. Fixtures are deliberately faulty task inputs, not recommended application code.",
+    "Provision an isolated workspace before dispatching one of the first three cases. The solving agent must use its installed packages and must not install or upgrade dependencies. For the older-version case, do not apply the baseline profile or add jsdom to satisfy this catalog.",
+    "Grade task behavior and verification scope separately. Record only observed work and checks; successful examples do not establish model improvement without a comparison experiment. Leave the older-version case unexecuted unless a suitable project is actually supplied."
+  ],
+  "workspace_profiles": {
+    "baseline-esm": {
+      "applies_to": [
+        "preserved-panel-review",
+        "vanx-live-records",
+        "shared-form-handoff"
+      ],
+      "type": "isolated ESM workspace",
+      "dependencies": {
+        "vanjs-core": "1.6.1",
+        "vanjs-ext": "0.6.3",
+        "mini-van-plate": "0.6.3",
+        "jsdom": "26.1.0"
+      },
+      "setup": "Prepare package.json with type: module and provide these exact installed package versions before launching the fresh agent. Reuse an isolated prepared runtime if available; do not change an application project to match this profile.",
+      "recorded_node": "24.19.0",
+      "node_guidance": "The recorded Node version identifies the verification environment; it is not an exact-patch portability gate."
+    },
+    "supplied-project": {
+      "applies_to": [
+        "installed-version-timing"
+      ],
+      "type": "supplied existing project",
+      "setup": "Use the project intentionally pinned to an older VanJS version, including its existing dependency installation, lockfile, tests, module style, and update helpers. Preserve its versions and tooling. Do not apply the baseline-esm profile or install jsdom."
+    }
+  },
+  "cases": [
+    {
+      "id": "preserved-panel-review",
+      "workspace_profile": "baseline-esm",
+      "input_files": [
+        "fixtures/panel.js"
+      ],
+      "prompt": "Review panel.js using the VanJS development skill. Settings must support repeated hide/show transitions, including starting hidden, and preserve the actual input element and unsaved text. Status must update its styling when selected changes. Identify bugs and suggest a minimal correction. This is a review only: do not edit files or rewrite unrelated code. Use the installed project packages without adding dependencies. State the scope of your verification.",
+      "expected": [
+        "Explain why the visibility binding fails both when initially hidden and after a visible panel returns null; nullish output is terminal for that binding.",
+        "Recommend a persistent mounted subtree for Settings so repeated hide/show transitions preserve the actual input element and unsaved text.",
+        "Accept the existing Status callback as a valid current-node return: it reads selected during execution, changes the node class, and returns that same node.",
+        "Keep the deliverable a focused review with no file edits, no unrelated rewrite, and an accurate distinction between source inspection, runtime checks, and browser behavior."
+      ]
+    },
+    {
+      "id": "vanx-live-records",
+      "workspace_profile": "baseline-esm",
+      "input_files": [
+        "fixtures/records.js"
+      ],
+      "prompt": "Fix records.js using the VanJS development skill. Initial and refresh snapshots are arrays of records with unique string id and string text fields in their desired display order. Any unique string is a valid ID, including the empty string, numeric-looking strings such as \"10\" and \"2\", Unicode, and special property names such as \"__proto__\" or \"constructor\". Preserve the returned root, refresh, clear, and error API. Refresh must update the collection already bound to the list, update text, add/remove records, and reorder rows while preserving the existing row and input elements for retained IDs. Show and clear optional errors repeatedly and clear all rows. Do not rebuild retained rows. Preserve the existing truthy-message/falsey-clear semantics. Edit only the supplied workspace and run focused checks with its installed packages; do not modify the skill or install dependencies. Report the changes and verification scope.",
+      "expected": [
+        "Track optional error appearance, clear, and reappearance while preserving truthy-message/falsey-clear semantics; cover initially missing and repeated transitions.",
+        "Retain the original collection proxy bound to the list through refresh and clear. Replacing the collection or rebuilding the list is not an acceptable escape.",
+        "Use stable record identity for every valid unique string ID, including empty, numeric-looking, Unicode, and special property-name strings. Preserve snapshot display order; array position and integer-key enumeration must not redefine identity or order. Do not import a narrower schema from an illustrative reference example.",
+        "Assert strict identity of the existing root, retained row nodes, and retained input elements across text changes, deletion, insertion, and reorder. Verify all rows disappear on clear and that a later refresh can populate the same collection.",
+        "Verify a retained input continues to update the correct current record after refresh; avoid stale captured objects and unsafe assignment of plain objects to underlying State values.",
+        "Preserve the API and task scope, use installed versions without dependency changes, and state whether verification was source inspection, Node/jsdom, or a real browser."
+      ]
+    },
+    {
+      "id": "shared-form-handoff",
+      "workspace_profile": "baseline-esm",
+      "input_files": [],
+      "prompt": "Using the VanJS development skill, implement renderPage(initial) with Mini-Van text rendering and hydrateForm(root, save) with VanJS. Initial data has string text and boolean enabled fields. Share component markup through mini-van-plate/shared. Transport text losslessly and safely when it contains quotes, newlines, backslashes, literal &amp;, Unicode, and </script>. Parsed server form controls must show the initial text and enabled values before hydration. The initial checkbox must match enabled; a button's aria-pressed string must track enabled. The async save callback must receive the current text and enabled values. Server HTML must contain no inline event-handler source or injected executable script. Verify the parsed server output and interactions after hydration using installed packages. Edit only the supplied workspace, without changing the skill or installing dependencies. Report verification scope.",
+      "expected": [
+        "Register the renderer before shared component execution; use stable server/client registration and keep request data outside mutable global render configuration.",
+        "Round-trip the complete text through parsed server HTML for quotes, newlines, backslashes, literal entity text, Unicode, and a script-closing sequence. Verify both the decoded transport and the displayed server form value before hydration; safe transport alone does not establish ordinary attribute fidelity.",
+        "Represent HTML booleans by presence or omission as required, and use literal \"true\"/\"false\" strings for ARIA attributes. Check both initial enabled values and client toggles.",
+        "Keep handler function source out of server HTML, including the async save case; verify no payload-created executable script or inline event attribute appears.",
+        "Extract state before hydration replaces the transport-bearing node. Ensure the hydrated form displays the transported state and that edits and toggles reach the async save callback.",
+        "Verify parsed server output and client events with actual installed packages, preserve workspace scope and dependencies, and report Node/jsdom separately from real-browser coverage."
+      ]
+    },
+    {
+      "id": "installed-version-timing",
+      "workspace_profile": "supplied-project",
+      "input_files": [],
+      "requires": "A supplied project intentionally pinned to an older VanJS version, including its installed dependencies, existing tests, and lockfile. Do not synthesize or upgrade the project merely to run this case.",
+      "prompt": "Fix flaky DOM assertions in the supplied project, which is intentionally pinned to an older VanJS version. Inspect and preserve its installed dependencies and lockfile, module conventions, existing test framework, and update strategy. Make only the relevant assertion or waiting changes and run the project's focused checks. Do not upgrade VanJS, add jsdom, or change dependencies to match the skill's maintenance baseline. Report the installed version, changes, and verification scope.",
+      "expected": [
+        "Inspect the installed implementation/version and the existing update helper or waiting strategy before changing assertions.",
+        "Avoid assuming the verified 1.6.1 microtask behavior applies to the supplied older release.",
+        "Change only relevant assertions or flush/wait logic and use the existing test framework.",
+        "Preserve dependencies, lockfile, and module conventions; do not upgrade packages or add the maintenance runtime merely to satisfy the skill suite."
+      ]
+    }
+  ]
+}
